@@ -1,0 +1,277 @@
+/* ===== Palet warna & dasar ===== */
+:root {
+  --biru-muda: #d6ecff;
+  --biru: #a9d4f5;
+  --pink-muda: #ffe4ee;
+  --pink: #ffb8d1;
+  --pink-tua: #d6336c;
+  --teks: #3d4a63;
+  --putih: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Quicksand", Arial, sans-serif;
+  color: var(--teks);
+  background: linear-gradient(135deg, var(--biru-muda), var(--pink-muda));
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: "Fredoka", "Quicksand", sans-serif;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* ===== Elemen form ===== */
+label {
+  display: block;
+  margin: 16px 0 6px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--biru-muda);
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: "Quicksand", sans-serif;
+  background: var(--putih);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--pink);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  background: var(--pink);
+  color: var(--teks);
+}
+
+button:hover {
+  background: var(--biru);
+}
+
+/* ===== Login ===== */
+#login-page {
+  max-width: none;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 900px;
+  min-height: 520px;
+  background: #f6f8fd;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(169, 212, 245, 0.6);
+}
+
+/* --- sisi kiri: form --- */
+.login-form-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 40px;
+}
+
+.login-form-side h1 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 0 0 12px;
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+.logo-mafadin {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+#login-btn {
+  width: 100%;
+  margin-top: 24px;
+  background: linear-gradient(135deg, var(--pink), var(--biru));
+  box-shadow: 0 8px 16px rgba(255, 184, 209, 0.5);
+}
+
+#login-btn:hover {
+  opacity: 0.9;
+}
+
+#login-message {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+#login-message.error {
+  color: var(--pink-tua);
+}
+
+/* --- sisi kanan: panel art --- */
+.login-art {
+  position: relative;
+  margin: 14px;
+  padding: 30px;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    var(--biru) 0%,
+    var(--pink-muda) 55%,
+    var(--pink) 100%
+  );
+}
+
+/* bukit dekoratif di bagian bawah panel */
+.login-art::after {
+  content: "";
+  position: absolute;
+  left: -20%;
+  right: -20%;
+  bottom: -60px;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 50% 50% 0 0;
+}
+
+.sun {
+  position: relative;
+  z-index: 1;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--putih);
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.4),
+    0 0 50px rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.sun img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-art h2,
+.login-art h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.login-art h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.login-art h3 {
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Quicksand", sans-serif;
+  line-height: 1.5;
+}
+
+/* ===== Halaman Katalog (untuk nanti) ===== */
+#catalog-page header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+#catalog-page h1 {
+  margin: 0;
+}
+
+#product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--putih);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(255, 184, 209, 0.4);
+}
+
+.product-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--biru-muda);
+}
+
+.product-card h3 {
+  font-size: 16px;
+  margin: 12px 0 6px;
+}
+
+.product-card .price {
+  font-weight: 700;
+  font-family: "Quicksand", sans-serif;
+  color: var(--pink-tua);
+  margin: 0;
+}
+
+/* ===== Responsif (HP) ===== */
+@media (max-width: 760px) {
+  .login-card {
+    grid-template-columns: 1fr;
+  }
+
+  .login-art {
+    order: -1;
+    min-height: 260px;
+  }
+}
+
+/* ===== Penyembunyi ===== */
+.hidden {
+  display: none !important;
+}
