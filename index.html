@@ -11,37 +11,44 @@
     <script src="index.js" defer></script>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="index.html" class="logo">MaFaDin</a>
-        <div class="nav-right">
-            <span class="welcome">Halo, <span id="user-name">User</span></span>
-            <button id="cart-button" class="nav-button cart-button">Cart <span id="cart-badge">0</span></button>
-            <button id="logout-button" class="nav-button logout-button">Logout</button>
+    <header class="site-header">
+
+        <nav class="navbar">
+            <a href="index.html" class="logo">MaFaDin</a>
+            <div class="category-dropdown">
+                <button class="category-button" id="category-button">Kategori</button>
+                <div class="category-menu" id="category-menu">
+                    <a href="#">Beauty</a>
+                    <a href="#">Fashion</a>
+                    <a href="#">Furniture</a>
+                    <a href="#">Groceries</a>
+                </div>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Cari di MaFaDin">
+            </div>
+
+            <button id="cart-button" class="cart-button">
+                🛒
+                <span id="cart-badge">0</span>
+            </button>
+
+            <div class="user-section">
+                <span class="welcome">Halo, <span id="user-name">User</span></span>
+                <button id="logout-button" class="logout-button">Logout</button>
+            </div>
+        </nav>
+
+        <div class="quick-links">
+            <span>Beauty</span>
+            <span>Fragrances</span>
+            <span>Furniture</span>
+            <span>Groceries</span>
         </div>
-    </nav>
+    </header>
 
     <main class="container">
-        <section class="page-header">
-            <div>
-                <h1>Products</h1>
-                <p>Temukan produk yang kamu cari.</p>
-            </div>
-            <div class="search-box">
-                <input type="text" id="search-input" placeholder="Cari produk...">
-            </div>
-        </section>
-
-        <section class="filter-section">
-            <select id="category-filter">
-                <option value="all">Semua Kategori</option>
-            </select>
-            <select id="sort-filter">
-                <option value="default">Urutkan</option>
-                <option value="price-low">Harga Terendah</option>
-                <option value="price-high">Harga Tertinggi</option>
-                <option value="rating-high">Rating Tertinggi</option>
-            </select>
-        </section>
 
         <p id="error-message" class="error-message hidden"></p>
 

@@ -5,6 +5,13 @@ if (!firstName) {
     window.location.href = "Mini_Shopee.html";
 }
 
+const categoryButton = document.getElementById("category-button");
+const categoryMenu = document.getElementById("category-menu");
+
+categoryButton.addEventListener("click", () => {
+    categoryMenu.classList.toggle("active");
+});
+
 const userName = document.getElementById("user-name");
 userName.textContent = firstName;
 const cartButton = document.getElementById("cart-button");
