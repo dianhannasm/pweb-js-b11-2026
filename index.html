@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaFaDin Mart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">MaFaDin</a>
+        <div class="nav-right">
+            <span class="welcome">Halo, <span id="user-name">User</span></span>
+            <button id="cart-button" class="nav-button cart-button">Cart <span id="cart-badge">0</span></button>
+            <button id="logout-button" class="nav-button logout-button">Logout</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="page-header">
+            <div>
+                <h1>Products</h1>
+                <p>Temukan produk yang kamu cari.</p>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Cari produk...">
+            </div>
+        </section>
+
+        <section class="filter-section">
+            <select id="category-filter">
+                <option value="all">Semua Kategori</option>
+            </select>
+            <select id="sort-filter">
+                <option value="default">Urutkan</option>
+                <option value="price-low">Harga Terendah</option>
+                <option value="price-high">Harga Tertinggi</option>
+                <option value="rating-high">Rating Tertinggi</option>
+            </select>
+        </section>
+
+        <p id="error-message" class="error-message hidden"></p>
+
+        <section id="product-list" class="product-list"></section>
+
+        <div class="load-more-container">
+            <button id="load-more-button" class="load-more-button">Load More</button>
+        </div>
+    </main>
+
+    <aside id="cart-panel" class="cart-panel">
+        <div class="cart-header">
+            <h2>Shopping Cart</h2>
+            <button id="close-cart" class="close-cart">×</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <p class="empty-cart">Keranjang masih kosong.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <strong id="cart-total-price">$0.00</strong>
+            </div>
+            <button id="checkout-button" class="checkout-button">Checkout</button>
+        </div>
+    </aside>
+
+    <div id="cart-overlay" class="cart-overlay"></div>
+
+    <div id="product-modal" class="modal hidden">
+        <div class="modal-content">
+            <button id="close-modal" class="close-modal">×</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+</body>
+</html>

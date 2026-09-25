@@ -17,7 +17,7 @@ body {
   margin: 0;
   font-family: "Quicksand", Arial, sans-serif;
   color: var(--teks);
-  background: linear-gradient(135deg, var(--biru-muda), var(--pink-muda));
+  background: white;
   min-height: 100vh;
 }
 
@@ -88,7 +88,7 @@ button:hover {
   background: #f6f8fd;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(169, 212, 245, 0.6);
+  box-shadow: 0 16px 40px rgba(79, 80, 81, 0.6);
 }
 
 /* --- sisi kiri: form --- */
