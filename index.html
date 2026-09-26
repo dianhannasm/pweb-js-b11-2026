@@ -18,11 +18,21 @@
             <div class="category-dropdown">
                 <button class="category-button" id="category-button">Kategori</button>
                 <div class="category-menu" id="category-menu">
-                    <a href="#">Beauty</a>
-                    <a href="#">Fashion</a>
-                    <a href="#">Furniture</a>
-                    <a href="#">Groceries</a>
+                    <a href="#" data-category="all">Semua Kategori</a>
+                    <a href="#" data-category="beauty">Beauty</a>
+                    <a href="#" data-category="furniture">Furniture</a>
+                    <a href="#" data-category="groceries">Groceries</a>
                 </div>
+            </div>
+
+            <div class="filter-controls">
+                <select id="sort-filter" class="nav-sort-select">
+                    <option value="default">Urutkan</option>
+                    <option value="price-asc">Harga: Rendah ke Tinggi</option>
+                    <option value="price-desc">Harga: Tinggi ke Rendah</option>
+                    <option value="name-asc">Nama: A - Z</option>
+                    <option value="name-desc">Nama: Z - A</option>
+                </select>
             </div>
 
             <div class="search-box">
@@ -39,13 +49,6 @@
                 <button id="logout-button" class="logout-button">Logout</button>
             </div>
         </nav>
-
-        <div class="quick-links">
-            <span>Beauty</span>
-            <span>Fragrances</span>
-            <span>Furniture</span>
-            <span>Groceries</span>
-        </div>
     </header>
 
     <main class="container">
