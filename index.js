@@ -76,6 +76,16 @@ function saveCart(cart) {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+function showCartToast() {
+    const toast = document.getElementById("cart-toast");
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1800);
+}
+
 function addToCart(product) {
     const cart = getCart();
     const existingProduct = cart.find((item) => item.id === product.id);
@@ -91,6 +101,37 @@ function addToCart(product) {
             quantity: 1
         });
     }
+
+    saveCart(cart);
+    renderCart();
+    showCartToast();
+}
+
+function decreaseQuantity(productId) {
+    const cart = getCart();
+    const product = cart.find((item) => item.id === productId);
+
+    if (!product) return;
+
+    product.quantity -= 1;
+
+    if (product.quantity <= 0) {
+        const updatedCart = cart.filter((item) => item.id !== productId);
+        saveCart(updatedCart);
+    } else {
+        saveCart(cart);
+    }
+
+    renderCart();
+}
+
+function increaseQuantity(productId) {
+    const cart = getCart();
+    const product = cart.find((item) => item.id === productId);
+
+    if (!product) return;
+
+    product.quantity += 1;
 
     saveCart(cart);
     renderCart();
@@ -127,8 +168,13 @@ function renderCart() {
             <img src="${item.thumbnail}" alt="${item.title}">
             <div class="cart-item-info">
                 <h4>${item.title}</h4>
-                <p>${item.quantity} × $${item.price.toFixed(2)}</p>
+                <p>$${item.price.toFixed(2)} / item</p>
                 <p>Total: $${(item.price * item.quantity).toFixed(2)}</p>
+                <div class="quantity-control">
+                    <button class="quantity-button decrease-button" data-id="${item.id}">−</button>
+                    <span>${item.quantity}</span>
+                    <button class="quantity-button increase-button" data-id="${item.id}">+</button>
+                </div>
             </div>
             <button class="remove-cart-button" data-id="${item.id}">✕</button>
         `;
@@ -335,10 +381,23 @@ categoryMenuLinks.forEach(link => {
 
 // Cart Event
 cartItems.addEventListener("click", (event) => {
+    const increaseButton = event.target.closest(".increase-button");
+    const decreaseButton = event.target.closest(".decrease-button");
     const removeButton = event.target.closest(".remove-cart-button");
-    if (!removeButton) return;
-    const productId = Number(removeButton.dataset.id);
-    removeFromCart(productId);
+
+    if (increaseButton) {
+        increaseQuantity(Number(increaseButton.dataset.id));
+        return;
+    }
+
+    if (decreaseButton) {
+        decreaseQuantity(Number(decreaseButton.dataset.id));
+        return;
+    }
+
+    if (removeButton) {
+        removeFromCart(Number(removeButton.dataset.id));
+    }
 });
 
 cartButton.addEventListener("click", () => {

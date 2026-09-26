@@ -122,12 +122,12 @@ button:hover {
 #login-btn {
   width: 100%;
   margin-top: 24px;
-  background: linear-gradient(135deg, var(--pink), var(--biru));
-  box-shadow: 0 8px 16px rgba(255, 184, 209, 0.5);
+  background: var(--pink-muda);
+  box-shadow: 0 8px 16px rgba(130, 124, 126, 0.5);
 }
 
 #login-btn:hover {
-  opacity: 0.9;
+  opacity: 0.7;
 }
 
 #login-message {
