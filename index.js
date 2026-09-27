@@ -282,7 +282,7 @@ async function fetchProducts() {
     try {
         if (errorMessage) errorMessage.classList.add("hidden");
 
-        const response = await fetch("https://dummyjson.com/products?limit=100");
+        const response = await fetch("https://dummyjson.com/products");
         if (!response.ok) throw new Error("Gagal mengambil data dari API.");
 
         const data = await response.json();
