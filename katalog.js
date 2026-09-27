@@ -1,6 +1,4 @@
-// ==========================================
 // 1. AUTHENTICATION & ELEMENT INITIALIZATION
-// ==========================================
 const firstName = localStorage.getItem("firstName");
 
 if (!firstName) {
@@ -38,9 +36,7 @@ const modalBody = document.getElementById("modal-body");
 const closeModal = document.getElementById("close-modal");
 
 
-// ==========================================
 // 2. TOGGLE DROPDOWN (Pencegah Tumpuk)
-// ==========================================
 if (categoryButton && categoryMenu) {
     categoryButton.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -64,9 +60,7 @@ document.addEventListener("click", (e) => {
 });
 
 
-// ==========================================
 // 3. CART FUNCTIONS (LOCAL STORAGE)
-// ==========================================
 function getCart() {
     const cart = localStorage.getItem("cart");
     return cart ? JSON.parse(cart) : [];
@@ -186,9 +180,7 @@ function renderCart() {
 }
 
 
-// ==========================================
 // 4. STATE MANAGEMENT & FILTER LOGIC
-// ==========================================
 let allProducts = [];
 let filteredProducts = [];
 let displayedCount = 0;
@@ -196,9 +188,7 @@ const ITEMS_PER_PAGE = 8;
 let selectedCategory = "all"; // State kategori aktif
 
 
-// ==========================================
 // 5. RENDER PRODUK & LOAD MORE
-// ==========================================
 function renderProductCards(productsToRender, isAppend = false) {
     if (!isAppend) {
         productList.innerHTML = "";
@@ -257,9 +247,7 @@ function resetAndRenderProducts() {
 }
 
 
-// ==========================================
 // 6. DEBOUNCE (CLOSURE)
-// ==========================================
 // debounce() mengembalikan fungsi baru yang "membungkus" fungsi asli (func).
 // Variabel timeoutId disimpan lewat closure, jadi tetap "diingat" di antara
 // pemanggilan-pemanggilan berikutnya, dan dipakai untuk membatalkan
@@ -275,9 +263,7 @@ function debounce(func, delay = 400) {
 }
 
 
-// ==========================================
 // 7. FETCH API & FILTER HANDLING
-// ==========================================
 async function fetchProducts() {
     try {
         if (errorMessage) errorMessage.classList.add("hidden");
@@ -332,9 +318,7 @@ function applyFilters() {
 }
 
 
-// ==========================================
 // 8. MODAL DETAIL PRODUK
-// ==========================================
 function showProductDetail(product) {
     if (!productModal || !modalBody) return;
 
@@ -365,10 +349,7 @@ function closeProductModal() {
 }
 
 
-// ==========================================
 // 9. EVENT LISTENERS
-// ==========================================
-
 // Klik link kategori di dropdown Navbar
 categoryMenuLinks.forEach(link => {
     link.addEventListener("click", (e) => {
@@ -435,8 +416,6 @@ if (productModal) {
 }
 
 
-// ==========================================
 // 10. INITIALIZATION
-// ==========================================
 fetchProducts();
 renderCart();
