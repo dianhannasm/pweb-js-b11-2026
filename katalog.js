@@ -21,6 +21,7 @@ const cartOverlay = document.getElementById("cart-overlay");
 const cartBadge = document.getElementById("cart-badge");
 const cartItems = document.getElementById("cart-items");
 const cartTotalPrice = document.getElementById("cart-total-price");
+const checkoutButton = document.getElementById("checkout-button"); // Added Checkout Button
 const logoutButton = document.getElementById("logout-button");
 
 // Catalogue, Search & Sort
@@ -72,6 +73,7 @@ function saveCart(cart) {
 
 function showCartToast() {
     const toast = document.getElementById("cart-toast");
+    if (!toast) return;
 
     toast.classList.add("show");
 
@@ -179,13 +181,53 @@ function renderCart() {
     cartTotalPrice.textContent = `$${totalPrice.toFixed(2)}`;
 }
 
+// FUNGSI CHECKOUT
+function handleCheckout() {
+    const cart = getCart();
+
+    if (cart.length === 0) {
+        alert("Keranjang kamu masih kosong. Silakan pilih produk terlebih dahulu!");
+        return;
+    }
+
+    // Hitung total belanja
+    const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    // Kosongkan keranjang di localStorage dan render ulang tampilan keranjang
+    localStorage.removeItem("cart");
+    renderCart();
+    closeCartPanel();
+
+    // Tampilkan Modal Informasi Berhasil Checkout
+    showCheckoutSuccessModal(totalAmount);
+}
+
+function showCheckoutSuccessModal(totalAmount) {
+    if (!productModal || !modalBody) return;
+
+    modalBody.innerHTML = `
+        <div style="text-align: center; padding: 20px 10px;">
+            <div style="font-size: 50px; color: #28a745; margin-bottom: 10px;"></div>
+            <h2 style="color: var(--pink-dark, #333); margin-bottom: 10px;">Pesanan Berhasil!</h2>
+            <p style="color: #666; font-size: 15px; margin-bottom: 15px;">
+                Terima kasih, <strong>${firstName}</strong>. Pesanan kamu sebesar
+                <strong style="color: #28a745;">$${totalAmount.toFixed(2)}</strong> sedang diproses.
+            </p>
+            <button id="close-checkout-modal" class="add-cart-button" style="width: 100%; padding: 10px 0;">Selesai</button>
+        </div>
+    `;
+
+    document.getElementById("close-checkout-modal").addEventListener("click", closeProductModal);
+    productModal.classList.remove("hidden");
+}
+
 
 // 4. STATE MANAGEMENT & FILTER LOGIC
 let allProducts = [];
 let filteredProducts = [];
 let displayedCount = 0;
 const ITEMS_PER_PAGE = 8;
-let selectedCategory = "all"; // State kategori aktif
+let selectedCategory = "all";
 
 
 // 5. RENDER PRODUK & LOAD MORE
@@ -242,16 +284,12 @@ function loadMoreProducts() {
 
 function resetAndRenderProducts() {
     displayedCount = 0;
-    productList.innerHTML = ""; // Kosongkan grid dulu, baru render ulang dari hasil filter/sort terbaru
+    productList.innerHTML = "";
     loadMoreProducts();
 }
 
 
 // 6. DEBOUNCE (CLOSURE)
-// debounce() mengembalikan fungsi baru yang "membungkus" fungsi asli (func).
-// Variabel timeoutId disimpan lewat closure, jadi tetap "diingat" di antara
-// pemanggilan-pemanggilan berikutnya, dan dipakai untuk membatalkan
-// (clearTimeout) timer sebelumnya setiap kali user mengetik lagi.
 function debounce(func, delay = 400) {
     let timeoutId;
     return function (...args) {
@@ -289,7 +327,6 @@ function applyFilters() {
     const searchValue = searchInput ? searchInput.value.toLowerCase().trim() : "";
     const selectedSort = sortFilter ? sortFilter.value : "default";
 
-    // 1. Filter Search (nama ATAU kategori) & Kategori aktif dari dropdown
     filteredProducts = allProducts.filter((product) => {
         const matchesSearch =
             product.title.toLowerCase().includes(searchValue) ||
@@ -298,7 +335,6 @@ function applyFilters() {
         return matchesSearch && matchesCategory;
     });
 
-    // 2. Sortir Produk
     if (selectedSort === "price-asc") {
         filteredProducts.sort((a, b) => a.price - b.price);
     } else if (selectedSort === "price-desc") {
@@ -313,7 +349,6 @@ function applyFilters() {
         filteredProducts.sort((a, b) => a.rating - b.rating);
     }
 
-    // Reset pagination dan tampilkan produk yang sudah di-filter
     resetAndRenderProducts();
 }
 
@@ -350,7 +385,6 @@ function closeProductModal() {
 
 
 // 9. EVENT LISTENERS
-// Klik link kategori di dropdown Navbar
 categoryMenuLinks.forEach(link => {
     link.addEventListener("click", (e) => {
         e.preventDefault();
@@ -360,7 +394,6 @@ categoryMenuLinks.forEach(link => {
     });
 });
 
-// Cart Event
 cartItems.addEventListener("click", (event) => {
     const increaseButton = event.target.closest(".increase-button");
     const decreaseButton = event.target.closest(".decrease-button");
@@ -393,6 +426,11 @@ function closeCartPanel() {
 
 closeCart.addEventListener("click", closeCartPanel);
 cartOverlay.addEventListener("click", closeCartPanel);
+
+// Checkout Event Listener
+if (checkoutButton) {
+    checkoutButton.addEventListener("click", handleCheckout);
+}
 
 // Logout Event
 logoutButton.addEventListener("click", () => {

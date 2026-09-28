@@ -25,7 +25,7 @@ loginForm.addEventListener("submit", async (event) => {
     if (user) {
       localStorage.setItem("firstName", user.firstName);
       loginMessage.textContent = "Login berhasil! Mengalihkan...";
-      window.location.href = "index.html"; // sementara, diganti di tahap katalog
+      window.location.href = "katalog.html"; // sementara, diganti di tahap katalog
     } else {
       loginMessage.textContent = "Username atau password salah.";
       loginMessage.classList.add("error");
